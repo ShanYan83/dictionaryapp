@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}About Us{% endblock %}
+{% block content %}
+    <h1>About Us</h1>
+    <p>Example of Filers</p>
+    <p>{{ filters|upper }}</p>
+    <p>{{ filters|lower }}</p>
+    <p>{{ filters|title }}</p>
+    <p>{{ filters|replace('l','L') }}</p>
+    <p>{{ filters|reverse_string }}</p>
+{% endblock %}

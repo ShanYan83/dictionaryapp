@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Welcome to my Flash Website{% endblock %}
+{% block content %}
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+    {% if session['name'] %}
+    <p>Hello{{ session['name'] }}</p>
+    {% endif %}
+    <a href="{{ url_for('set_data') }}">Set Session Data</a><br>
+    <a href="{{ url_for('get_data') }}">Get Session Data</a><br>
+    <a href="{{ url_for('clear_session') }}">Clear Session Data</a><br>
+    <a href="{{ url_for('set_cookie') }}">Set Cookie Data</a><br>
+    <a href="{{ url_for('get_cookie') }}">Get Cookie Data</a><br>
+    <a href="{{ url_for('remove_cookie') }}">Remove Cookie Data</a><br>
+    <h1>Hello World</h1>
+    <p>{{greet}}, {{ name}}</p>
+    <ul>
+        {% for item in list %}
+            <li>{{item}}</li>
+        {% endfor %}
+    </ul>
+<a href="{{url_for('about_us')}}">About Us</a>
+<span class="danger">Hello</span>
+<a href="#" class="btn btn-primary">Button</a>
+<h1>Javascript JSON Request</h1>
+<button id="post_button">Send Post request</button>
+<script type="text/javascript">
+    const postButton = document.getElementById('post_button');
+    const jsonData = {name:'Mike', greeting:'Hello'}
+    postButton.addEventListener('click',()=>{
+        fetch('{{ url_for("handle_post") }}',{
+            method : 'POST',
+            headers: {
+                'Content-type':'application/json;charset=utf-8'
+                },
+            body : JSON.stringify(jsonData)
+        })
+        .then(response => response.json())
+        .then(data => console.log('Success:',data))
+        .catch((error) => {
+            console.error('Error:',error)
+        });
+    });
+</script>
+{% endblock %}
