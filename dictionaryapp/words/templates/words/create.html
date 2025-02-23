@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Words {% endblock %}
+{% block content %}
+<div class="col-sm-12 col-md-2 col-lg-3"></div>
+<div class="col-sm-12 col-md-8 col-lg-6">
+    <div class="card m-2">
+        <div class="card-header bg-secondary text-white">Add Word</div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('words.create') }}" class="form-group">
+                {% if word %} <input type="text" value="{{ word.id}}" name="id" hidden>{% endif %}
+                <div class="input-group mb-3">
+                    <div class="input-group-text" id="f1">English Word</div>
+                    <input autofocus type="text" name="eng_word" id="eng_word" class="form-control" placeholder="Enter English Word" aria-label="username" aria-describedby="f1" required {% if word %} value="{{ word.eng_word}}"{% endif %}>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-text" id="f2">English POS</div>
+                    <input type="text" name="eng_pos" id="eng_pos" class="form-control" placeholder="Enter English Word POS" aria-label="username" aria-describedby="f2" required {% if word %} value="{{ word.eng_pos}}"{% endif %}>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-text" id="f3">English Meaning</div>
+                    <input type="text" name="eng_meaning" id="eng_meaning" class="form-control" placeholder="Enter English Word Meaning" aria-label="username" aria-describedby="f3" required {% if word %} value="{{ word.eng_meaning}}"{% endif %}>
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-text" id="f4">Tenyidie Word</div>
+                    <input type="text" name="local_word" id="local_word" class="form-control" placeholder="Enter Tenyidie Word" aria-label="username" aria-describedby="f4" required {% if word %} value="{{ word.local_word}}"{% endif %}>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-text" id="f5">Tenyidie POS</div>
+                    <input type="text" name="local_pos" id="local_pos" class="form-control" placeholder="Enter Tenyidie Word POS" aria-label="username" aria-describedby="f5" required {% if word %} value="{{ word.local_pos}}"{% endif %}>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-text" id="f6">Tenyidie Meaning</div>
+                    <input type="text" name="local_meaning" id="local_meaning" class="form-control" placeholder="Enter Tenyidie Word Meaning" aria-label="username" aria-describedby="f6" required {% if word %} value="{{ word.local_meaning}}"{% endif %}>
+                </div>
+                <div class="text-center"><button type="submit" class="btn btn-dark">{% if word %} Update {% else %}Confirm Add{% endif %}</button>
+                    {% if word %} <a href="{{ url_for('words.index') }}" class="btn btn-dark">Cancel</a>{% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12 col-md-2 col-lg-3"></div>
+{% endblock %}

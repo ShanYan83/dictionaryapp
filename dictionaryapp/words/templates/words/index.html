@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Words {% endblock %}
+{% block content %}
+<div class="p-5">
+{% if words %}
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>English Word</th>
+                <th>English POS</th>
+                <th>English Meaning</th>
+                <th>Tenyidie Word</th>
+                <th>Tenyidie POS</th>
+                <th>Tenyidie Meaning</th>
+            </tr>
+        </thead>
+        {% for word in words%}
+        <tr id="word{{word.id}}">
+            <td><a class="btn btn-success" href="{{ url_for('words.edit',id=word.id)}}">Edit</a> <button class="btn btn-danger" onclick="deleteData('word{{word.id}}','/words/delete/{{word.id}}')">Delete</button> {{ word.eng_word }}</td>
+            <td>{{ word.eng_pos }}</td>
+            <td>{{ word.eng_meaning }}</td>
+            <td>{{ word.local_word }}</td>
+            <td>{{ word.local_pos }}</td>
+            <td>{{ word.local_meaning }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+{% if not words %}
+    <div class="alert alert-danger">Oops! No Words are found! <a href="{{ url_for('words.create') }}" class="btn btn-dark">Click here</a> to Add now</div>
+{% endif %}
+</div>
+{% endblock %}
